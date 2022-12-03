@@ -7,16 +7,10 @@ priority_sum = 0
 with open('inputs/day3data.txt', 'r') as file:
     for line in file:
         num_split_items = int(len(line.replace('\n', '')) / 2)
-        first = line[:num_split_items]
-        second = line[num_split_items:]
-        match = []
-        for letter in second:
-            if letter in first:
-                match.append(letter)
-            else:
-                pass
-        for j in set(match):
-            priority_sum += letters[j]
+        compartments = line[:num_split_items], line[num_split_items:]
+        common = set.intersection(*map(set, compartments))
+        for letter in common:
+            priority_sum += letters[letter]
 print(priority_sum)
 
 # part 2
